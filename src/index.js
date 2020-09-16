@@ -1,5 +1,6 @@
 const request = require('request');
 const express = require('express');
+const axios = require('axios')
 require('dotenv/config');
 
 const app = express();
@@ -7,29 +8,27 @@ const app = express();
 app.use(express.json());
 
 const users = [];
-const branch = [];
+const callQueue = [];
 var nextId = "";
 var newNext = "";
 
+
 function sendDiscord(message){
-    const client = new Discord.Client();
-
-    client.on('ready', () => {
-      console.log(`Logged in as ${client.user.tag}!`);
-    });
-    
-    client.on('message', msg => {
-      msg.reply(message);
-
-      if (msg.content === 'ping') {
-        msg.reply('Pong!');
-      }
-    });
-    client.login(process.env.DISCORD_KEY);
-};
+axios
+  .post(DISCORD_URL_BOT, {
+    todo: message
+  })
+  .then(res => {
+    console.log(`statusCode: ${res.statusCode}`)
+    console.log(res)
+  })
+  .catch(error => {
+    console.error(error)
+  })
+}
 
 function loadUsers(){
-    //load branch
+    //load callQueue
     request(process.env.ASKOZIA_GET_ALL_EXTENSIONS, function (error, response, body) {  
         if (!error && response.statusCode == 200) {
             const all = JSON.parse(body);
@@ -73,7 +72,7 @@ function server(){
                 //Only a very boring person will find that comment. @jorgediasdsg
                 const agentIndex = users.findIndex(user => user.userId == ramal);
                 if (agentIndex < 0){
-                    var name = "SDS"
+                    var name = "ND"
                 } else {
                     var name = users[agentIndex].callerid;
                 }
@@ -86,20 +85,23 @@ function server(){
                     lastCall,
                     next: 0
                 }
-                const branchIndex = branch.findIndex(user => user.userId == userId);
-                if (branchIndex < 0){
-                    branch.push(user);
+                const callQueueIndex = callQueue.findIndex(user => user.userId == userId);
+                if (callQueueIndex < 0){
+                    callQueue.push(user);
                 } else {
-                    branch[branchIndex] = user;
+                    callQueue[callQueueIndex] = user;
                 }
             });
 
         }
     });
     var record = 0;
-    branch.forEach(function (user, array) {
+    callQueue.forEach(function (user, array) {
         const lastCall = new Date('2020-01-01 ' + user.lastCall);
-        if ( record < lastCall || lastCall == '00:00:00' ) {
+        if(lastCall == '00:00:00'){
+            lastCall == '10:00:00';
+        }
+        if ( record < lastCall) {
             record = lastCall;
             user.next = "== next ==";
             if (nextId != user.userId){
@@ -111,9 +113,9 @@ function server(){
         }
     })
     if (newNext != nextId){
-        const branchIndex = users.findIndex(user => user.userId == nextId);
+        const callQueueIndex = users.findIndex(user => user.userId == nextId);
         if (agentIndex < 0){
-            branch[branchIndex].next = "";
+            callQueue[callQueueIndex].next = "";
         }
         nextId = newNext
 
@@ -121,11 +123,11 @@ function server(){
         if (agentIndex < 0){
             console.log("User not found!")
         } else {
-            message = users[agentIndex].callerid + " are the next!";
-            sendDiscord(message);
+            //message = users[agentIndex].callerid + " are the next!";
+            //sendDiscord(message);
         }
     }
-    console.table(branch);
+    console.table(callQueue);
 }
 
 setInterval(server, 1000);

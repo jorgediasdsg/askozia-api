@@ -19,7 +19,7 @@
 - [Express](http://expressjs.com/ "Express")
 - [Askozia](https://en.wikipedia.org/wiki/AskoziaPBX "Askozia")
 - [Dotenv](https://www.npmjs.com/package/dotenv "dotenv")
-- [Request]("https://www.npmjs.com/package/request" "Request")
+- [Request]("https://www.npmjs.com/package/request "Request")
 
 <h1 id="how-to-run">:computer: How to run the application</h1>
 

@@ -47,4 +47,4 @@ node src/index.js
 ```
 <hr>
 
-Made with by @jorgediasdsg 2020
+@jorgediasdsg 2020

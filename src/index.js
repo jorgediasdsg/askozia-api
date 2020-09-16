@@ -11,6 +11,7 @@ const users = [];
 const callQueue = [];
 var nextId = "";
 var newNext = "";
+var record = 0;
 
 
 function sendDiscord(message){
@@ -95,13 +96,12 @@ function server(){
 
         }
     });
-    var record = 0;
     callQueue.forEach(function (user, array) {
-        const lastCall = new Date('2020-01-01 ' + user.lastCall);
-        if(lastCall == '00:00:00'){
-            lastCall == '10:00:00';
+        if(user.lastCall == '00:00:00'){
+            user.lastCall='12:00:00';
         }
-        if ( record < lastCall) {
+        const lastCall = new Date('2020-01-01 ' + user.lastCall);
+        if ( record <= lastCall) {
             record = lastCall;
             user.next = "== next ==";
             if (nextId != user.userId){

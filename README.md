@@ -21,7 +21,7 @@
 
 <h1 id="how-to-run">:computer: How to run the application</h1>
 
-<h2>Pre Requiriments</h2>
+<h2>Pre Requirements</h2>
 
 <p>You will need these tools instaled in your machine:</p>
 

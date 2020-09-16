@@ -1,7 +1,11 @@
 const request = require('request');
 const express = require('express');
 const Discord = require('discord.js');
-
+const {
+    askozia_get_all_extensions,
+    askozia_queue_show_status,
+    discord_key
+} = require('../config')
 
 const app = express();
 
@@ -26,7 +30,7 @@ function sendDiscord(message){
         msg.reply('Pong!');
       }
     });
-    client.login('NzU1NTgyOTk0MTg1NDUzNjA4.X2FZfw.qoCDwzlp7DNONa_xUIN2t70pYUE.X2FZfw.qoCDwzlp7DNONa_xUIN2t70pYUE');
+    client.login(discord_key);
 };
 
 function logRequest(request, response, next){
@@ -44,7 +48,7 @@ app.use(logRequest);
 
 function loadUsers(){
     //load branch
-    request('http://187.49.226.34:56080/api.php?command=get_all_extensions&hash=c483a8b740d5fd5068dd86471747a730', function (error, response, body) {  
+    request(askozia_get_all_extensions, function (error, response, body) {  
         if (!error && response.statusCode == 200) {
             const all = JSON.parse(body);
             all.forEach(function (extension, array) {
@@ -74,7 +78,7 @@ app.get('/loadUsers', (req, res)=>{
 })
 
 function server(){
-    request('http://187.49.226.34:56080/api.php?command=queue_show_status&queue_id=CALLFLOW-29969517258331e2684e1b-QUEUE-60&hash=c483a8b740d5fd5068dd86471747a730', function (error, response, body) {  
+    request(askozia_queue_show_status, function (error, response, body) {  
         if (!error && response.statusCode == 200) {
             const { agents } = JSON.parse(body);
             // console.table(agents);
@@ -145,54 +149,3 @@ function server(){
 setInterval(server, 1000);
 
 app.listen(3333)
-
-
-
-
-
-// http://187.49.226.34:56080/api.php?command=queue_get_queues&hash=c483a8b740d5fd5068dd86471747a730
-// http://187.49.226.34:56080/api.php?command=queue_show_status&queue_id=CALLFLOW-29969517258331e2684e1b-QUEUE-60&hash=c483a8b740d5fd5068dd86471747a730
-// http://187.49.226.34:56080/api.php?command=get_all_extensions&hash=c483a8b740d5fd5068dd86471747a730
-// http://187.49.226.34:56080/api.php?command=get_all_commands&hash=c483a8b740d5fd5068dd86471747a730
-
-
-// {
-//     extension: '2014',
-//     callerid: 'Suporte Externo 14 - JORGE',
-//     descr: 'Suporte Externo 14 - JORGE',
-//     'phone-mac-type': 'none',
-//     'phone-template-index': '',
-//     vmpin: '6396',
-//     codec: [ 'ulaw', 'alaw', 'gsm', '' ],
-//     secret: 'isf199',
-//     multiuser_username: 'User-201',
-//     multiuser_password: '1Ysct.[K9}Z5',
-//     overwritecallerid: '',
-//     'dect-base-id': 'none',
-//     busylevel: '2',
-//     parallel_call: '',
-//     boss_secretary: '',
-//     forwarding: 'none',
-//     forwarding_on_busy: 'none',
-//     forwarding_on_unavailable: 'none',
-//     forwarding_external: 'none',
-//     forwarding_on_busy_external: 'none',
-//     forwarding_on_unavailable_external: 'none',
-//     uniqid: 'SIP-PHONE-10890027525e700d26a0979',
-//     language: 'pt-br',
-//     ringlength: 'indefinitely',
-//     transfercapabilitymode: '',
-//     natmode: 'yes',
-//     dtmfmode: 'auto',
-//     defaultprovider: '',
-//     sendrpid: 'rpid',
-//     qualify: '2',
-//     qualifyfreq: '60',
-//     manual_context_name: '',
-//     parallel_call1: '',
-//     parallel_call2: '',
-//     parallel_call3: '',
-//     'handset-index': '',
-//     version: '1',
-//     lastcheck: '1584457086'
-//   },

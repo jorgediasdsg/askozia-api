@@ -1,11 +1,6 @@
 <h1 align="center">:rocket: Trainning: Use API Askozia :rocket:</h1>
 
-<<<<<<< HEAD
 <p align="center">This is a personal training project for the Rocketseat GoStack course. In this project we will be consuming the Askozia API using NodeJS and a lot of javascript.</p>
-=======
-#### Functions
-This application connect to askozia api and return console with banch of calls, show next user to hang up and send message in discord to next user.
->>>>>>> e5663f9ad179f46020678bd14bc5461ca3145b65
 
 <p align="center">
  <a href="#objective">Objective</a> •

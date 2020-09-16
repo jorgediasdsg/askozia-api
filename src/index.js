@@ -28,19 +28,6 @@ function sendDiscord(message){
     client.login(process.env.DISCORD_KEY);
 };
 
-function logRequest(request, response, next){
-    const { method, url } = request;
-
-    const logLabel = `[${method.toUpperCase()}] ${url}`;
-
-    console.time(logLabel)
-
-    next();
-
-    console.timeEnd(logLabel);
-}
-app.use(logRequest);
-
 function loadUsers(){
     //load branch
     request(process.env.ASKOZIA_GET_ALL_EXTENSIONS, function (error, response, body) {  

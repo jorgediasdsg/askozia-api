@@ -1,7 +1,7 @@
 # askozia-api
 
 #### Functions
-This application connect to askozia api and return console with banch of calls, show next user to hangup and send message in discord to next user.
+This application connect to askozia api and return console with banch of calls, show next user to hang up and send message in discord to next user.
 
 #### Requiriments
 - nodejs

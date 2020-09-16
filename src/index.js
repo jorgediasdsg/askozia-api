@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json());
 
 const users = [];
-const fila = [];
+const branch = [];
 var nextId = "";
 var newNext = "";
 
@@ -85,19 +85,18 @@ function server(){
                     lastCall,
                     next: 0
                 }
-                const filaIndex = fila.findIndex(user => user.userId == userId);
-                if (filaIndex < 0){
-                    fila.push(user);
+                const branchIndex = branch.findIndex(user => user.userId == userId);
+                if (branchIndex < 0){
+                    branch.push(user);
                 } else {
-                    fila[filaIndex] = user;
+                    branch[branchIndex] = user;
                 }
             });
 
         }
     });
-    // Descobrir a espera mais alta
     var record = 0;
-    fila.forEach(function (user, array) {
+    branch.forEach(function (user, array) {
         const lastCall = new Date('2020-01-01 ' + user.lastCall);
         if ( record < lastCall || lastCall == '00:00:00' ) {
             record = lastCall;
@@ -111,9 +110,9 @@ function server(){
         }
     })
     if (newNext != nextId){
-        const filaIndex = users.findIndex(user => user.userId == nextId);
+        const branchIndex = users.findIndex(user => user.userId == nextId);
         if (agentIndex < 0){
-            fila[filaIndex].next = "";
+            branch[branchIndex].next = "";
         }
         nextId = newNext
 
@@ -121,11 +120,11 @@ function server(){
         if (agentIndex < 0){
             console.log("Não encontramos o usuário")
         } else {
-            message = users[agentIndex].callerid + " é o proximo da fila!";
+            message = users[agentIndex].callerid + " é o proximo da branch!";
             sendDiscord(message);
         }
     }
-    console.table(fila);
+    console.table(branch);
 }
 
 setInterval(server, 1000);

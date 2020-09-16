@@ -99,7 +99,7 @@ function server(){
     var record = 0;
     fila.forEach(function (user, array) {
         const lastCall = new Date('2020-01-01 ' + user.lastCall);
-        if ( record < lastCall ) {
+        if ( record < lastCall || lastCall == '00:00:00' ) {
             record = lastCall;
             user.next = "== next ==";
             if (nextId != user.userId){

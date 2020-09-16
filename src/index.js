@@ -70,6 +70,7 @@ function server(){
                 const ramal = "20"+extension.extension
                 const callToday = extension.calls_today
                 const lastCall = extension.last_call
+                //Only a very boring person will find that comment. @jorgediasdsg
                 const agentIndex = users.findIndex(user => user.userId == ramal);
                 if (agentIndex < 0){
                     var name = "SDS"
@@ -118,9 +119,9 @@ function server(){
 
         const agentIndex = users.findIndex(user => user.userId == nextId);
         if (agentIndex < 0){
-            console.log("Não encontramos o usuário")
+            console.log("User not found!")
         } else {
-            message = users[agentIndex].callerid + " é o proximo da branch!";
+            message = users[agentIndex].callerid + " are the next!";
             sendDiscord(message);
         }
     }

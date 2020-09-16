@@ -1,11 +1,6 @@
 const request = require('request');
 const express = require('express');
-const Discord = require('discord.js');
-const {
-    askozia_get_all_extensions,
-    askozia_queue_show_status,
-    discord_key
-} = require('../config')
+require('dotenv/config');
 
 const app = express();
 
@@ -30,7 +25,7 @@ function sendDiscord(message){
         msg.reply('Pong!');
       }
     });
-    client.login(discord_key);
+    client.login(process.env.DISCORD_KEY);
 };
 
 function logRequest(request, response, next){
@@ -48,7 +43,7 @@ app.use(logRequest);
 
 function loadUsers(){
     //load branch
-    request(askozia_get_all_extensions, function (error, response, body) {  
+    request(process.env.ASKOZIA_GET_ALL_EXTENSIONS, function (error, response, body) {  
         if (!error && response.statusCode == 200) {
             const all = JSON.parse(body);
             all.forEach(function (extension, array) {
@@ -78,7 +73,7 @@ app.get('/loadUsers', (req, res)=>{
 })
 
 function server(){
-    request(askozia_queue_show_status, function (error, response, body) {  
+    request(process.env.ASKOZIA_QUEUE_SHOW_STATUS, function (error, response, body) {  
         if (!error && response.statusCode == 200) {
             const { agents } = JSON.parse(body);
             // console.table(agents);

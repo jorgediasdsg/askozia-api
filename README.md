@@ -1,23 +1,50 @@
-# askozia-api
+<h1 align="center">:rocket: Trainning: Use API Askozia :rocket:</h1>
 
-#### Functions
-This application connect to askozia api and return console with banch of calls, show next user to hangup and send message in discord to next user.
+<p align="center">This is a personal training project for the Rocketseat GoStack course. In this project we will be consuming the Askozia API using NodeJS and a lot of javascript.</p>
 
-#### Requiriments
-- nodejs
-- npm
-- yarn
+<p align="center">
+ <a href="#objective">Objective</a> •
+ <a href="#technologies">Technologies</a> •
+ <a href="#how-to-run">How to run the application</a> •
+</p>
 
-#### How to use
+<h1 id="objective">:bulb: Objective</h1>
+</p>This application connects to the Askozia API, returns the list of registered users, watches the list of calls, points out who will be the next to answer the call and fires the next message in the discord.</p>
 
-<code>git clone git@github.com:jorgediasdsg/askozia-api.git</code>
+<h1 id="technologies">:rocket: Technologies</h1>
 
-<code>cd askozia-api</code>
+<p>It was used these technologies in this challenge.</p>
 
-<code>mv .example.env .env</code>
+- [Node.js](https://nodejs.org/en/ "Node.js")
+- [Express](http://expressjs.com/ "Express")
+- [Askozia](https://en.wikipedia.org/wiki/AskoziaPBX "Askozia")
 
-<code>yarn</code>
+<h1 id="how-to-run">:computer: How to run the application</h1>
 
-- You need alter .env to run.
+<h2>Pre Requiriments</h2>
 
-<code>node src/index.js</code>
+<p>You will need these tools instaled in your machine:</p>
+
+- [Node.js](https://nodejs.org/en/ "Node.js")
+- [Yarn](https://yarnpkg.com/ "Yarn")
+- [Git](https://git-scm.com/ "Git")
+
+```bash
+# Clone this repository
+$ git clone git@github.com:jorgediasdsg/askozia-api.git
+
+# Go into the folder of the project
+$ cd askozia-api
+
+# Install the dependencies
+$ yarn
+
+# Copy ans edit enviroments **Important!**
+$ mv .example.env .env
+
+#If you want to run the project
+node src/index.js
+```
+<hr>
+
+Made with by @jorgediasdsg 2020

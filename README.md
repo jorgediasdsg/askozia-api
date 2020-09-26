@@ -9,7 +9,13 @@
 </p>
 
 <h1 id="objective">:bulb: Objective</h1>
-</p>This application connects to the Askozia API, returns the list of registered users, watches the list of calls, points out who will be the next to answer the call and fires the next message in the discord.</p>
+
+- Connects to the Askozia API
+- Return the list of registered users
+- Watches the queue calls
+- points out who will be the next to answer the call
+- send message to discord when user login and logout
+- Show json history and queue usind GET method.
 
 <h1 id="technologies">:rocket: Technologies</h1>
 

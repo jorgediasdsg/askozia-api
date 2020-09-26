@@ -45,7 +45,7 @@ $ yarn
 $ mv .example.env .env
 
 #If you want to run the project
-node src/index.js
+yarn dev
 ```
 <hr>
 

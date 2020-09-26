@@ -44,7 +44,6 @@ async function alert(msg){
     history.unshift(msg)
 }
 
-alert(":desktop: Servidor de monitoramento iniciado!")
 
 function loadUsers(){
     //load callQueue
@@ -80,6 +79,8 @@ app.get('/history', (req, res)=>{
     return res.send(history);
 })
 
+alert(":desktop: Servidor de monitoramento iniciado!")
+alert(":desktop: Confira o histórico em  http://localhost:3333/history!")
 function server(){
     request(process.env.ASKOZIA_QUEUE_SHOW_STATUS, function (error, response, body) {  
         if (!error && response.statusCode == 200) {

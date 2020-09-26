@@ -3,6 +3,15 @@
     "axios": "^0.20.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "request": "^2.88.2",
-  }
+    "html-to-json": "^0.6.0",
+    "html-to-json-converter": "^1.0.3",
+    "node-libcurl": "^2.2.0",
+    "request": "^2.88.2"
+  },
+  "name": "askozia-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:jorgediasdsg/askozia-api.git",
+  "author": "Jorge Dias <jorgediasdsg@gmail.com>",
+  "license": "MIT"
 }

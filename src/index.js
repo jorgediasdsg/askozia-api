@@ -112,8 +112,8 @@ function server(){
                 const callQueueIndex = oldQueue.findIndex(user => user.userId == userId);
                 if (callQueueIndex < 0){
                     callQueue.push(user);
-                    console.log(`Usuário ${user.name} acabou de logar!`)
-                    alert(`:arrow_up_small: Usuário ${user.name} acabou de logar!`);
+                    console.log(`${user.name} acabou de logar!`)
+                    alert(`:arrow_up_small: ${user.name} acabou de logar!`);
                 } else {
                     callQueue[callQueueIndex] = user;
                 }
@@ -156,7 +156,7 @@ function server(){
         const userId = user.userId; 
         const userIndex = callQueue.findIndex(user => user.userId == userId);
         if (userIndex < 0){
-            alert(`:arrow_down_small: Usuário ${user.name} acabou de sair!`);
+            alert(`:arrow_down_small: ${user.name} acabou de sair!`);
         }
     });
     oldQueue = callQueue;

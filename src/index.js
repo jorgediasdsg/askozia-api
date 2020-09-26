@@ -16,32 +16,21 @@ var oldQueue = [];
 
 
 
-
-
 function sendDiscord(message){
     const urlRocket="https://flin.rocket.chat/hooks/Nf7dtuaikgsi64aCa/ayLSatokYP2Z3gpYAWEDsg5zp7iDPxPPY6AkEfwJkRHgiCqb"
     const urlAzkozia="http://187.49.226.34:23600/cfe/wallboard/wallboard.php?queue=CALLFLOW-29969517258331e2684e1b-QUEUE-60&size=medium&show_agents&colorize"
     // const msgJson="{\"alias\":\"Azkozia Bot\",\"text\": \"${message}\",\"attachments\":[{\"title\":\"AZKOZIA\",\"title_link\": \"${urlAzkozia}\",\"text\":\"Call\",\"color\":\"#FFAAAA\"}]}";
     // curl -H "Content-Type: application/json" -X POST -d "{\"alias\":\"Nagios Bot\",\"text\": \"$MSG\",\"attachments\":[{\"title\":\"NAGIOS\",\"title_link\": \"$LINK\",\"text\":\"$HEADER\",\"color\":\"#FFAAAA\"}]}" $url_rocket
-
-    const curl = new Curl();
- 
-    curl.setOpt('URL', urlRocket);
-    curl.setOpt('FOLLOWLOCATION', true);
     
-    curl.on('end', function (statusCode, data, headers) {
-    console.info(statusCode);
-    console.info('---');
-    console.info(data.length);
-    console.info('---');
-    console.info(this.getInfo( 'TOTAL_TIME'));
-    
-    this.close();
-});
-
-curl.on('error', curl.close.bind(curl));
-curl.perform();
-
+    request.post(
+        urlRocket,
+        { json: { message: message } },
+        function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                console.log(body);
+            }
+        }
+        );
 }
 sendDiscord("Sistema de monitoramento iniciado!");
 

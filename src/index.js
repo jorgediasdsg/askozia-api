@@ -80,7 +80,7 @@ app.get('/history', (req, res)=>{
 })
 
 alert(":desktop: Servidor de monitoramento iniciado!")
-alert(":desktop: Confira o histórico em  http://localhost:3333/history!")
+alert(`:desktop: Confira o histórico em ${process.env.DNS_APPLICATION}`)
 function server(){
     request(process.env.ASKOZIA_QUEUE_SHOW_STATUS, function (error, response, body) {  
         if (!error && response.statusCode == 200) {

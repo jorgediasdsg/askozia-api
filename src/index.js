@@ -76,11 +76,11 @@ app.get('/loadUsers', (req, res)=>{
     return res.send(users);
 })
 app.get('/history', (req, res)=>{
-    return res.send(history);
+    return res.send({oldQueue, history});
 })
 
 alert(":desktop: Servidor de monitoramento iniciado!")
-alert(`:desktop: Confira o histórico em ${process.env.DNS_APPLICATION}`)
+alert(`:desktop: Confira o histórico em ${process.env.DNS_APPLICATION}/history`)
 function server(){
     request(process.env.ASKOZIA_QUEUE_SHOW_STATUS, function (error, response, body) {  
         if (!error && response.statusCode == 200) {

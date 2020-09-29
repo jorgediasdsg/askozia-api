@@ -46,7 +46,7 @@ async function alert(msg){
 
 
 function loadUsers(){
-    //load callQueue
+    //load users api
     request(process.env.ASKOZIA_GET_ALL_EXTENSIONS, function (error, response, body) {  
         if (!error && response.statusCode == 200) {
             const all = JSON.parse(body);
@@ -114,6 +114,7 @@ function server(){
                     callQueue.push(user);
                     console.log(`${user.name} acabou de logar!`)
                     alert(`:arrow_up_small: ${user.name} acabou de logar!`);
+                    console.table(callQueue);
                 } else {
                     callQueue[callQueueIndex] = user;
                 }
@@ -127,13 +128,13 @@ function server(){
         const lastCall = new Date('2020-01-01 ' + user.lastCall);
         if ( record <= lastCall) {
             record = lastCall;
-            user.next = "== next ==";
+            user.next = 1;
             if (nextId != user.userId){
                 newNext = user.userId;
             }
             nextId = user.userId;
         } else {
-            user.next = "";
+            user.next = 0;
         }
     })
     if (newNext != nextId){
@@ -142,21 +143,22 @@ function server(){
             callQueue[callQueueIndex].next = "";
         }
         nextId = newNext
-
+        
         const agentIndex = users.findIndex(user => user.userId == nextId);
         if (agentIndex < 0){
             console.log("User not found!")
         } else {
             message = users[agentIndex].callerid + " are the next!";
+            console.table(callQueue);
             alert(message);
         }
     }
-    console.table(callQueue);
     oldQueue.forEach(function (user, array) {
         const userId = user.userId; 
         const userIndex = callQueue.findIndex(user => user.userId == userId);
         if (userIndex < 0){
             alert(`:arrow_down_small: ${user.name} acabou de sair!`);
+            console.table(callQueue);
         }
     });
     oldQueue = callQueue;
